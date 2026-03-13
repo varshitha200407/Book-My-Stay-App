@@ -141,3 +141,86 @@ public class UseCase2RoomInitialization {
         System.out.println("\nApplication terminated successfully.");
     }
 }
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * RoomInventory manages centralized room availability.
+ * It stores room types and their available counts using a HashMap.
+ *
+ * @author Student
+ * @version 3.0
+ */
+public class RoomInventory {
+
+    private Map<String, Integer> inventory;
+
+    /**
+     * Constructor initializes room availability.
+     */
+    public RoomInventory() {
+        inventory = new HashMap<>();
+
+        // Initial room availability
+        inventory.put("Single Room", 5);
+        inventory.put("Double Room", 3);
+        inventory.put("Suite Room", 2);
+    }
+
+    /**
+     * Retrieve availability of a specific room type
+     */
+    public int getAvailability(String roomType) {
+        return inventory.getOrDefault(roomType, 0);
+    }
+
+    /**
+     * Update availability for a room type
+     */
+    public void updateAvailability(String roomType, int newCount) {
+        inventory.put(roomType, newCount);
+    }
+
+    /**
+     * Display full inventory
+     */
+    public void displayInventory() {
+        System.out.println("\n--- Current Room Inventory ---");
+
+        for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue() + " rooms available");
+        }
+    }
+}
+/**
+ * Book My Stay App
+ * Demonstrates centralized room inventory management using HashMap.
+ *
+ * @author Student
+ * @version 3.1
+ */
+public class UseCase3InventorySetup {
+
+    public static void main(String[] args) {
+
+        System.out.println("=====================================");
+        System.out.println("     Book My Stay - Version 3.1      ");
+        System.out.println(" Centralized Room Inventory System   ");
+        System.out.println("=====================================");
+
+        // Initialize inventory
+        RoomInventory inventory = new RoomInventory();
+
+        // Display initial inventory
+        inventory.displayInventory();
+
+        // Example update
+        System.out.println("\nUpdating Suite Room availability...");
+        inventory.updateAvailability("Suite Room", 4);
+
+        // Display updated inventory
+        inventory.displayInventory();
+
+        System.out.println("\nApplication terminated successfully.");
+    }
+}
